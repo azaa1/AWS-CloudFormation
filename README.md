@@ -1,8 +1,17 @@
-# aws-cloudformation
-AWS CloudFormation
+# AWS CloudFormation
+
+<p align="center">
+  <img width="300" height="150" src="img/CloudFormation.png">
+</p>
+
+## What is AWS CloudFormation?
+
+AWS CloudFormation is a service that gives developers and businesses an easy way to create a collection of related AWS and third party resources and provision them in an orderly and predictable fashion.
+
+[Official Documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html)
 
 
-## Files
+## Templates
 
 [s3bucket.yaml](templates/s3bucket.yaml) - simple CloudFormation Template that creates S3Bucket. 
 
