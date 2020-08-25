@@ -24,3 +24,8 @@ AWS CloudFormation is a service that gives developers and businesses an easy way
     - TeamTagValue
 
     - EnvTagValue 
+
+[securitygroup.yaml](templates/securitygroup.yaml) - simple CloudFormation Template that creates SecurityGroup with Tags, and requires the following parameteres : 
+
+    - SGName  - name for the resource
+    - MyVpc   - VpcId for which the SG will be created. 
