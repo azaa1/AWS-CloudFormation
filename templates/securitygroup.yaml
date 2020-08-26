@@ -16,9 +16,9 @@ Resources:
     Properties:
       GroupDescription: "Test SG"
       GroupName: 
-        Ref: SGName
+        Ref: SGName  # Reference to SGName Parameter
       VpcId:
-        Ref: MyVpc
+        Ref: MyVpc   # Reference to MyVpc Parameter
       SecurityGroupEgress:
       - CidrIp: 0.0.0.0/0
         IpProtocol: tcp
