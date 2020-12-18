@@ -28,7 +28,7 @@ Parameters:
   # SSH Key Name
   SSHKeyName:
     Type: String
-    Default: 
+    Default: ''
     Description: SSH Key Name
 
 # Required Tags

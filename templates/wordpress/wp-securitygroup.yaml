@@ -53,6 +53,10 @@ Resources:
           FromPort: 22
           ToPort: 22
           IpProtocol: tcp
+        - CidrIp: 0.0.0.0/0
+          FromPort: 80
+          ToPort: 80
+          IpProtocol: tcp
       Tags:
         - Key: Name
           Value: !Ref WPSGName

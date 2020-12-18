@@ -1,0 +1,69 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Reusable Template for AWS RDS
+
+# Define Parameters
+Parameters:
+
+  # Master User Name
+  MasterName:
+    Type: String
+    Default: ''
+    Description: Master User Name
+  # Master Password
+  MasterPassword:
+    Type: String
+    Default: ''
+    Description: Master User Password
+  # Subnet 1
+  Subnet1:
+    Type: String
+    Default: ''
+    Description: Subnet 1 
+  # Subnet 2
+  Subnet2:
+    Type: String
+    Default: ''
+    Description: Subnet2
+  # Database Name
+  DatabaseName:
+    Type: String
+    Default: 'WordPressDB'
+    Description: Database Name
+
+# Define Resources
+Resources:
+  # Database Subnet Group
+  RDSSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties: 
+      DBSubnetGroupDescription: Subnet Group for RDS
+      DBSubnetGroupName: WordPressDBSubnetGroup
+      SubnetIds: 
+        - !Ref Subnet1
+        - !Ref Subnet2
+  # Database Instance
+  WordPressRDS:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      Engine: mariadb
+      EngineVersion: 10.4.8
+      DBInstanceClass: db.t2.micro
+      DBName: !Ref DatabaseName
+      MasterUsername: !Ref MasterName
+      MasterUserPassword: !Ref MasterPassword
+      StorageType: gp2
+      AllocatedStorage: 20
+      MaxAllocatedStorage: 50
+      DBSubnetGroupName: !Ref RDSSubnetGroup
+      PubliclyAccessible: false
+      BackupRetentionPeriod: 0
+      DeletionProtection: false
+
+# Define Outputs 
+Outputs:
+  DBName:
+    Description: Database Name
+    Value: !Ref WordPressRDS
+  DBSubnet:
+    Description: Database Subnet Group
+    Value: !Ref RDSSubnetGroup
