@@ -1,0 +1,52 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Logging KMS Keys
+
+### Resources ###
+Resources:
+
+  LoggingKey:
+    Type: AWS::KMS::Key
+    Properties:
+      Description: For Kinesis Encryption
+      EnableKeyRotation: true
+      KeyPolicy:
+        Version: 2012-10-17
+        Id: Compliance
+        Statement:
+          - Sid: LocalAccess
+            Effect: Allow
+            Principal:
+              AWS: !Sub arn:aws:iam::${AWS::AccountId}:root
+            Action:
+              - kms:*
+            Resource: '*'
+          - Sid: KeyUser
+            Effect: Allow
+            Principal:
+              AWS: !ImportValue IngestionRoleArn
+            Action: kms:*
+  
+  LoggingKeyAlias:
+    Type: AWS::KMS::Alias
+    Properties:
+      AliasName: alias/LoggingKey
+      TargetKeyId: !Ref LoggingKey
+
+### OutPuts ###
+Outputs:
+  LoggingKeyId: 
+    Description: 'Logging Key Id'
+    Value: !Ref LoggingKey
+    Export:
+      Name: LoggingKeyId
+  LoggingKeyArn:
+    Description: 'Logging Key Arn'
+    Value: !GetAtt LoggingKey.Arn 
+    Export:
+      Name: LoggingKeyArn
+  LogginKeyAlias:
+    Description: 'Logging Key Alias'
+    Value: !Ref LoggingKeyAlias
+    Export:
+      Name: LoggingKeyAlias
