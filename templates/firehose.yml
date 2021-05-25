@@ -1,0 +1,8 @@
+  Firehose:
+    Type: AWS::KinesisFirehose::DeliveryStream
+    Properties: 
+      DeliveryStreamEncryptionConfigurationInput:
+        KeyARN: !GetAtt LoggingKey.Arn
+        KeyType: CUSTOMER_MANAGED_CMK
+      DeliveryStreamName: secops-SecurityLogFirehose
+      DeliveryStreamType: DirectPut
