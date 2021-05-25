@@ -17,7 +17,9 @@ Resources:
           - Sid: LocalAccess
             Effect: Allow
             Principal:
-              AWS: !Sub arn:aws:iam::${AWS::AccountId}:root
+              AWS: 
+                - !Sub arn:aws:iam::${AWS::AccountId}:root
+                - !ImportValue IngestionRoleArn
             Action:
               - kms:*
             Resource: '*'
